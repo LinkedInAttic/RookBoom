@@ -1,0 +1,219 @@
+.reset() {
+    padding: 0;
+    margin: 0;
+    font-weight: normal;
+}
+
+html {
+    overflow: -moz-scrollbars-vertical;
+    overflow-y: scroll;
+}
+
+body {
+    .reset();
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    background: url("../i/wood_1.png") fixed;
+    color: @menuColor;
+}
+
+ul {
+    .reset();
+    list-style: none;
+}
+
+li, p, h1, h2, h3, h4 {
+    .reset();
+}
+
+a.close {
+    font-family: 'Menlo', 'Monaco', 'Curier New', monospace;
+    float: right;
+    opacity: 0.4;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 20px;
+    margin-top: -3px;
+    &:hover {
+        opacity: 0.6;
+    }
+}
+
+.yui3-panel-focused {
+    outline: none;
+    border: none;
+}
+
+.yui3-widget-mask {
+    background-color:black;
+    zoom:1;
+    -ms-filter:"alpha(opacity=40)";
+    filter:alpha(opacity=40);
+    opacity: 0.4;
+}
+
+.popover {
+    padding: 0;
+    z-index: 60;
+
+    .popover-content {
+        padding: 0;
+    }
+
+    .popover-inner {
+        width: auto;
+        padding: 0;
+    }
+
+    &.bottom .arrow:after {
+        border-bottom-color: @backColor;
+    }
+}
+
+.info-dialog {
+    .rounded-corners(5px);
+    .float-container();
+
+    background-image: url('../i/dialog-bckg.png');
+    border: 2px solid @backColor;
+    padding: 10px;
+    color: @boardColor;
+    position: relative;
+
+    .content {
+        margin-right: 10px;
+        float:right;
+    }
+
+    .blackout {
+        .rounded-corners(2px);
+        z-index: 5;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: url('/public/i/loader.gif') fadeout(black, 30%) center no-repeat;
+    }
+}
+
+.info-modal .blackout {
+    .rounded-corners(2px);
+    z-index: 5;
+    position: absolute;
+    top: 102px;
+    background: url('/public/i/loader.gif') fadeout(black, 30%) center no-repeat;
+}
+
+.popover-title {
+    display: none;
+}
+
+.tip {
+    .float-container();
+    width: 500px;
+
+    .arrow-left {
+        margin-left: 1px;
+        margin-right: 1px;
+        width: 8px;
+        height:38px;
+        float: left;
+        background: url('/public/i/green-arrow-left.png') no-repeat center;
+    }
+    .arrow-right {
+        margin-right: 1px;
+        margin-left: 1px;
+        width: 8px;
+        height:38px;
+        float: left;
+        background: url('/public/i/green-arrow-right.png') no-repeat center;
+    }
+
+    .tip-dialog {
+        .rounded-corners(5px);
+        .float-container();
+        float: left;
+
+        background-image: url('../i/pattern-green-lines.png');
+        border: 2px solid green;
+        position: relative;
+
+        .content {
+            float: left;
+            margin: 5px;
+            color: white;
+            font-size: 13px;
+            line-height: 24px;
+        }
+
+        img {
+            float: left;
+            margin: 5px;
+        }
+
+        span {
+            .rounded-corners(2px);
+            float: left;
+            margin: 5px;
+            font-size: 13px;
+            line-height: 24px;
+            cursor: pointer;
+            background-color: white;
+            color: green;
+            padding: 0 10px;
+        }
+    }
+}
+
+.arrow-top {
+    height: 8px;
+    background: url('/public/i/arrow-up.png') no-repeat center;
+    margin-top: 5px;
+}
+
+#login-form {
+    .float-container();
+    margin: 18px 0 0 0;
+    input {
+        float: left;
+        width: 200px;
+    }
+    button {
+        float:right;
+    }
+    label {
+        float:left;
+    }
+}
+
+.time-mask-row {
+    .float-container();
+    &.top ul {
+        padding: 10px 0;
+        margin-right: 10px;
+    }
+    &.bottom ul {
+        padding: 15px 0 10px 0;
+    }
+    ul {
+        .float-container();
+        float: right;
+    }
+    li {
+        text-align: center;
+        font-size: 14px;
+        width: 2 * @slotWidth + 2;
+        float: left;
+        .separator {
+            opacity: 0.7;
+            float: right;
+            margin-right: -2px;
+        }
+    }
+}
+
+img.dropdown {
+    float: right;
+    margin: 3px 0 0 5px;
+}
+

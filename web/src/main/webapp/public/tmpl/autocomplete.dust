@@ -1,0 +1,2 @@
+<p class="name">{name|s}</p>
+<p class="email">{email|s}</p>

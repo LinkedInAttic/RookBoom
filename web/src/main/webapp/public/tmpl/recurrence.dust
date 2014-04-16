@@ -1,0 +1,130 @@
+<form class="recurrence-form form-horizontal">
+
+    <div class="pull-left">
+        <div class="control-group" style="display: none">
+            <label class="control-label">Repeats</label>
+
+            <div class="controls">
+                <select class="rec-pattern">
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="pattern-fields daily">
+            <div class="control-group">
+                <label class="control-label">Every</label>
+
+                <div class="controls">
+                    <select class="interval-days">
+                        <option value="1">day</option>
+                        <option value="2">other day</option>
+                        <option value="3">3rd day</option>
+                        <option value="4">4th day</option>
+                        <option value="5">5th day</option>
+                        <option value="6">6th day</option>
+                        <option value="7">7th day</option>
+                        <option value="8">8th day</option>
+                        <option value="9">9th day</option>
+                        <option value="10">10th day</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="pattern-fields weekly">
+            <div class="control-group">
+                <label class="control-label">Every</label>
+
+                <div class="controls">
+                    <select class="interval-weeks">
+                        <option value="1">week</option>
+                        <option value="2">other week</option>
+                        <option value="3">3rd week</option>
+                        <option value="4">4th week</option>
+                        <option value="5">5th week</option>
+                        <option value="6">6th week</option>
+                        <option value="7">7th week</option>
+                        <option value="8">8th week</option>
+                        <option value="9">9th week</option>
+                        <option value="10">10th week</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">On</label>
+
+                <div class="controls">
+                    <div class="btn-group days" data-toggle="buttons-checkbox">
+                        <button type="button" class="btn" data-day="Monday">Mon</button>
+                        <button type="button" class="btn" data-day="Tuesday">Tue</button>
+                        <button type="button" class="btn" data-day="Wednesday">Wed</button>
+                        <button type="button" class="btn" data-day="Thursday">Thu</button>
+                        <button type="button" class="btn" data-day="Friday">Fri</button>
+                    </div>
+                    <div class="select-all-days">
+                        <span class="brace left"></span>
+                        <span>select all</span>
+                        <span class="brace right"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pull-left">
+        <div class="control-group">
+            <label class="control-label">Start Date</label>
+
+            <div class="controls">
+                <input type="text" class="datepicker date-from"/>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">End After</label>
+
+            <div class="controls">
+                <select class="end-after">
+                    <option value="1">1 month</option>
+                    <option value="2">2 month</option>
+                    <option value="3">3 month</option>
+                    <option value="4">4 month</option>
+                    <option value="5">5 month</option>
+                    <option value="6">6 month</option>
+                </select>
+            </div>
+        </div>
+
+        <!--
+        <div class="control-group">
+            <label class="control-label">End</label>
+
+            <div class="controls end">
+
+                <div class="btn-group" data-toggle="buttons-radio">
+                    <button type="button" class="btn" data-for="end-by">By</button>
+                    <button type="button" class="btn" data-for="end-after">After</button>
+                </div>
+
+                <input type="number" class="end-after" />
+                <input type="text" class="datepicker end-by"/>
+            </div>
+        </div>
+        -->
+
+        <div class="control-group">
+            <div class="controls">
+                <a class="btn btn-primary rec-apply">Show schedule</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="recurrence-actions block-actions">
+    <span class="action reset">Reset</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="action collapse">Close</span>
+</div>
+
+<div class="sep"></div>

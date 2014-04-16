@@ -1,0 +1,16 @@
+<div class="tip" id="tip-{id}">
+    {?isLeftArrow}
+    <div class="arrow-left"></div>
+    {/isLeftArrow}
+    <div class="tip-dialog">
+        <img src="/public/i/check.png" />
+        <div class="content">
+            {text}
+        </div>
+        <span class="remove">Got it!</span>
+    </div>
+    {?isLeftArrow}
+    {:else}
+    <div class="arrow-right"></div>
+    {/isLeftArrow}
+</div>

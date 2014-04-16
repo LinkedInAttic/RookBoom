@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+        xmlns="http://www.springframework.org/schema/security"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:beans="http://www.springframework.org/schema/beans"
+        xmlns:p="http://www.springframework.org/schema/p"
+        xmlns:c="http://www.springframework.org/schema/c"
+        xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+    <beans:bean id="ldapActiveDirectoryAuthProvider"
+                class="org.springframework.security.ldap.authentication.ad.ActiveDirectoryLdapAuthenticationProvider"
+                c:domain="${ldap.domain}"
+                c:url="${ldap.url}"
+                p:useAuthenticationRequestCredentials="true"
+                p:convertSubErrorCodesToExceptions="true"/>
+
+    <beans:bean id="ajaxAuthenticationResultHandler"
+                class="com.linkedin.rookboom.web.AjaxAuthenticationResultHandler"/>
+
+    <authentication-manager erase-credentials="false">
+        <authentication-provider ref="ldapActiveDirectoryAuthProvider"/>
+    </authentication-manager>
+
+    <http auto-config="true" pattern="/**">
+        <form-login login-page="/login"
+                    authentication-success-handler-ref="ajaxAuthenticationResultHandler"
+                    authentication-failure-handler-ref="ajaxAuthenticationResultHandler"/>
+        <!-- Security zones -->
+        <intercept-url pattern="/booking/*"
+                       access="IS_AUTHENTICATED_FULLY"/>
+    </http>
+
+</beans:beans>

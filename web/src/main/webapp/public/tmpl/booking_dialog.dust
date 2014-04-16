@@ -1,0 +1,84 @@
+{>dialog/}
+{<content}
+
+<div class="book-dialog" id="book-dialog">
+    <form id="booking-form" class="form-horizontal" method="POST" action="/booking/create" onsubmit="return false;">
+        {?realRoom}
+        <input type="hidden" name="resource" value="{room.email}"/>
+        {/realRoom}
+        <input type="hidden" name="from" value="{from}"/>
+        <input type="hidden" name="to" id="book-to" value="{to}"/>
+        <input type="hidden" name="location" value="{location}"/>
+
+        <fieldset>
+            <legend>
+                <p>{?realRoom}Book {room.name}{:else}Meet{/realRoom} from <span id="legend-from" class="strong"></span> to <span id="legend-to" class="strong"></span></p>
+                {?recurrence.active}
+                <p class="recurrence">{recurrence.description}</p>
+                {/recurrence.active}
+            </legend>
+
+            <div class="control-group">
+                <label class="control-label">Invite</label>
+
+                <div class="required-attendees controls" id="required-attendees">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="controls">
+                    <input id="attendees-include" type="text" placeholder="Attendee name or email..."/>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="book-duration">Duration</label>
+
+                <div class="controls">
+                    {?freeDropdown}
+                    <select class="input-xlarge" id="book-duration" name="duration">
+                        {#free}
+                        <option value="{value}">{label}</option>
+                        {/free}
+                    </select>
+                    {:else}
+                    <div class="btn-group" data-toggle="buttons-radio" id="book-duration">
+                        {#free}
+                        <button class="btn" type="button" value="{value}">{label}</button>
+                        {/free}
+                    </div>
+                    {/freeDropdown}
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="book-meetingLocation">Location</label>
+
+                <div class="controls">
+                    <input type="text" class="input-xlarge" id="book-meetingLocation" name="meetingLocation"
+                           value="{?realRoom}{room.name} ({room.attributes.building}, {room.attributes.floor} floor){/realRoom}"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="book-subject">Subject</label>
+
+                <div class="controls">
+                    <input type="text" class="input-xlarge" id="book-subject" name="subject"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="book-body">Body</label>
+
+                <div class="controls">
+                    <textarea class="input-xlarge" id="book-body" rows="5" name="body"></textarea>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <input type="button" class="btn submit btn-primary" value="Book!"/>
+                    <input type="button" class="btn remove" value="Cancel"/>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+{/content}

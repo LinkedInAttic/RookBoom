@@ -1,0 +1,7 @@
+<div class="date-ctrl prev"></div>
+<div class="date-ctrl next"></div>
+<div class="text cal">
+    <p id="date-month">{month}</p>
+    <p id="date-dow">{dow}</p>
+</div>
+<div id="date-day" class="num cal">{day}</div>

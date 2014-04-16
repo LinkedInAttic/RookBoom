@@ -1,0 +1,4 @@
+{>dialog_base/}
+{<content}
+<span id="logout">logout<span/>
+{/content}

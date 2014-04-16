@@ -1,0 +1,5 @@
+<ul>
+    {#frames}
+    <li><span class="time" time="{.}"></span></li>
+    {/frames}
+</ul>

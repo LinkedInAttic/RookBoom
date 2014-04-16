@@ -1,0 +1,5 @@
+{?principal.loggedIn}
+<p id="auth-principal">{principal.user.displayName}<img class="dropdown" src="/public/i/down.png"/></p>
+{:else}
+<span id="login">Login</span>
+{/principal.loggedIn}

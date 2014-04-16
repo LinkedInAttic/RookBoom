@@ -1,0 +1,23 @@
+<form class="login-form" method="post" action="/j_spring_security_check">
+
+    <input type="hidden" name="ajax" value="{?ajax}true{:else}false{/ajax}"/>
+
+    <div class="field">
+        <input class="input" type="text" id="j_username" name="j_username" placeholder="Login..."/>
+    </div>
+
+    <div class="field">
+        <input class="input" type="password" id="j_password" name="j_password" placeholder="Password..."/>
+    </div>
+
+    <div class="field last">
+        <label class="input left" for='_spring_security_remember_me'>
+            <input type='checkbox'
+                   id="_spring_security_remember_me"
+                   name='_spring_security_remember_me'/>
+            &nbsp;Remember me
+        </label>
+
+        <input class="input right" type="submit" value="Login"/>
+    </div>
+</form>

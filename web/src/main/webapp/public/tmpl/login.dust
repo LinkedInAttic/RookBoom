@@ -1,0 +1,8 @@
+{>base/}
+
+<!-- body content -->
+{<bodyContent}
+    <div id="login-panel" class="login-container">
+        {>login_form/}
+    </div>
+{/bodyContent}

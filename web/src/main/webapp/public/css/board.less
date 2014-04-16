@@ -1,0 +1,347 @@
+@h3offset: 10px;
+@capacityWidth: 60px;
+
+.schedule-list() {
+    .schedule-list {
+        float: right;
+
+        .slot {
+            float: left;
+            height: @rowHeight - 1;
+            width: @slotWidth;
+            border-top: 1px solid lighten(@boardColor, 80%);
+            border-left: 1px solid lighten(@boardColor, 80%);
+
+            &:last-child {
+                border-right: 1px solid lighten(@boardColor, 80%);
+            }
+        }
+    }
+}
+
+#board {
+    background-image: url("../i/eggshell.jpg");
+    color: @boardColor;
+    margin-bottom: 50px;
+
+    .preloader {
+        width: 80px;
+        margin: 0 auto 70px auto;
+        padding-left: 100px;
+    }
+
+    #schedule {
+        .float-container();
+        padding: @top 10px 0 10px;
+        position: relative;
+
+        .schedule-row {
+            .float-container();
+            min-height: @rowHeight;
+            h3 {
+                .trimToEllipsis();
+                width: @leftOffset - @capacityWidth - @h3offset - 10px;
+                //margin-top: 14px;
+                line-height: @rowHeight;
+                margin-left: @h3offset;
+                font-size: 13px;
+                float: left;
+                &:hover {
+                    cursor: pointer;
+                    text-decoration: underline;
+                }
+            }
+
+            &:last-child .schedule-list, .has-border-bottom .slot {
+                border-bottom: 1px solid lighten(@boardColor, 80%);
+            }
+
+            .row-extra {
+                clear: both;
+            }
+
+            .to-book {
+                background-color: orange;
+                opacity: 0.7;
+            }
+        }
+        .capacity {
+            .float-container();
+            opacity: 0.5;
+            line-height: @rowHeight;
+            width: @capacityWidth;
+            float: right;
+            img {
+                margin-right: 5px;
+                vertical-align: middle;
+                width: 16px;
+                height: 16px;
+                &.false {
+                    visibility: hidden;
+                }
+            }
+        }
+
+        #rooms {
+            .schedule-list();
+
+            .slot {
+                .owner-label {
+                    position: absolute;
+                    background: url("../i/label-1.png");
+                    width: 12px;
+                    height: 16px;
+                    right: 5px;
+                }
+
+                &.busy {
+                    &.info .busy-label, &.info:hover .busy-label {
+                        background-color: fadeout(@backColor, 20%);
+                    }
+                    .busy-label-outer {
+                        height: @rowHeight - 5px;
+                        position: absolute;
+                        z-index: 49;
+                        border: 2px solid fadeout(white, 100%);
+                        &.active, &.active:hover {
+                            border-color: @backColor;
+                        }
+                        &:hover {
+                            border-color: fadeout(@backColor, 50%);
+                        }
+                    }
+                    .busy-label {
+                        height: @rowHeight - 5px;
+                        position: absolute;
+                        width: 100%;
+                        z-index: 50;
+                        background: url("../i/cool-booked-op50.png");
+                        cursor: pointer;
+                    }
+                }
+                .tobook-label {
+                    background-color: fadeout(orange, 30%);
+                    position: absolute;
+                    z-index: 10;
+                }
+
+                &.free {
+                    cursor: pointer;
+                }
+
+                .book-label {
+                    color: @backColor;
+                    position: absolute;
+                    margin: 10px 0 0 13px;
+                    text-decoration: underline;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    cursor: pointer;
+                    opacity: 0.8;
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+
+        .group-row {
+            h3 {
+                background-color: @backColor;
+                color: @menuColor;
+                font-size: 12px;
+                line-height: 12px;
+                padding: 3px 0 3px 10px;
+                margin-top: 10px;
+                width: 174px;
+                cursor: pointer;
+                img {
+                    float: right;
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+}
+
+#attendees {
+    .float-container();
+    .schedule-list();
+    #attendees-input {
+        z-index: 90;
+        width: 174px;
+        margin-top: 10px;
+        float: left;
+    }
+    .preloader {
+        margin: 0 auto;
+        padding-top: 18px;
+        padding-left: 100px;
+    }
+    .slot {
+        &.busy {
+            .busy-label {
+                z-index: 50;
+                background: url("../i/cool-booked-op50.png");
+                position: absolute;
+                height: @rowHeight - 5px;
+                margin: 2px;
+            }
+        }
+    }
+
+    .schedule-row {
+        img {
+            margin: 2px 5px 0 0;
+            float: left;
+            width: @rowHeight - 2px;
+            height: @rowHeight - 2px;
+        }
+        .user {
+            .trimToEllipsis();
+            float: left;
+            width: @leftOffset - @h3offset - @rowHeight - 20px;
+            line-height: @rowHeight;
+        }
+        a.close {
+            float: left;
+            margin-top:11px;
+        }
+    }
+}
+
+.book-info {
+    .float-container();
+
+    form {
+        margin: 0;
+    }
+
+    .owner {
+        opacity: 0.6;
+    }
+
+    .booked {
+        text-transform: uppercase;
+        font-weight: bold;
+        opacity: 0.5;
+    }
+
+    .pic {
+        float: left;
+        width: 80px;
+        height: 80px;
+        background: url('/public/i/loader-dark.gif') center no-repeat;
+        img {
+            margin: auto;
+        }
+    }
+    .descr {
+        margin-left: 10px;
+        float: left;
+    }
+
+    .edit {
+        .cancel {
+            margin: 34px 0 0 0;
+            float: right;
+        }
+    }
+}
+
+.book-dialog {
+    margin: 20px;
+    width: 500px;
+
+    input {
+        &[type="text"] {
+            height: 25px;
+        }
+        margin-right: 10px;
+    }
+
+    select.input-xlarge {
+        min-width: 414px;
+        height: 30px;
+    }
+
+    .input-xlarge {
+        min-width: 405px;
+    }
+
+    #book-duration .btn {
+        margin-right: 0;
+        width: 70px;
+        height: 30px;
+    }
+
+    legend {
+        border: none;
+        padding: 0 0 10px 0;
+        margin: 0;
+
+        .recurrence {
+            font-size: 16px;
+            opacity: 0.5;
+        }
+    }
+
+    .control-label {
+        width: 60px;
+    }
+    .controls {
+        margin-left: 80px;
+    }
+
+    .required-attendees {
+        .float-container();
+        min-width: 400px;
+        max-width: 500px;
+
+        .attendee-input {
+            .float-container();
+            float: left;
+        }
+
+        .required-attendee {
+            .gradient(lighten(@backColor, 20%), @backColor);
+            .rounded-corners(20px);
+            .float-container();
+
+            padding: 2px 10px 4px 10px;
+            margin: 3px 5px 2px 0;
+            color: white;
+            float: left;
+
+            .mark {
+                float: left;
+                .rounded-corners(20px);
+                .gradient(#690, #004d00);
+                width: 10px;
+                height: 10px;
+                margin: 5px 5px 5px 0;
+            }
+            .name {
+                float: left;
+            }
+            .exclude-attendee {
+                float: right;
+                cursor: pointer;
+                font-weight: bold;
+                font-size: 15px;
+
+                color: white;
+                opacity: 0.7;
+                font-size: 13px;
+                margin-left: 5px;
+                margin-top: 3px;
+                line-height: 14px;
+            }
+        }
+    }
+
+    .strong {
+        font-weight: bold;
+    }
+}

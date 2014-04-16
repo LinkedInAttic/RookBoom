@@ -1,0 +1,22 @@
+{>dialog/}
+{<content}
+<div class="faq">
+    <ul class="block">
+        <h3>
+            FAQ
+        </h3>
+        <li>
+            <p><b>Q:</b>How do I add someone's schedule to the schedule board?</p>
+            <p><b>A:</b>Just start typing name or email in the input field of the 'Attendees' block and select a person from an autocomplete list.</p>
+        </li>
+        <li>
+            <p><b>Q:</b>How do I see who booked the room for this or that time?</p>
+            <p><b>A:</b>Click any busy slot on the schedule board to see information about the appointment.</p>
+        </li>
+        <li>
+            <p><b>Q:</b>I have a question/bug report/suggestion.</p>
+            <p><b>A:</b>Don't hesitate to contact us at <a href="mailto:go-book-dev@linkedin.com" target="_blank">go-book-dev@linkedin.com</a></p>
+        </li>
+    </ul>
+</div>
+{/content}

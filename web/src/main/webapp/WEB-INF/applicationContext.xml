@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:p="http://www.springframework.org/schema/p"
+        xmlns:c="http://www.springframework.org/schema/c"
+        xmlns:util="http://www.springframework.org/schema/util"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+                            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+                            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+    <context:property-placeholder location="file:${rookboom.config.dir}/config.properties"/>
+
+    <bean id="serviceContext"
+          class="com.linkedin.rookboom.extension.SpringContext" />
+
+    <bean id="serviceFactory"
+          class="${service.factory}"
+          c:context-ref="serviceContext" />
+
+    <!-- Schedule -->
+
+    <bean id="scheduleDao"
+          class="com.linkedin.rookboom.schedule.dao.EwsScheduleDaoImpl"
+          p:webServiceTemplate-ref="wsTemplate" />
+
+    <bean id="internalDao"
+          class="com.linkedin.rookboom.schedule.dao.InternalScheduleDaoImpl"
+          c:dataSource-ref="dataSource" />
+
+    <bean id="scheduleManager"
+          factory-bean="serviceFactory"
+          factory-method="scheduleManager" />
+
+    <!-- Booking service -->
+    <bean id="appointmentDao"
+          class="com.linkedin.rookboom.schedule.dao.EwsAppointmentDaoImpl"
+          p:webServiceTemplate-ref="userWsTemplate"/>
+
+    <bean id="bookingService"
+          factory-bean="serviceFactory"
+          factory-method="bookingService" />
+
+    <!-- Filters -->
+    <bean id="filterManager"
+          factory-bean="serviceFactory"
+          factory-method="filterManager" />
+
+    <!-- Layout -->
+    <bean id="layoutManager"
+          factory-bean="serviceFactory"
+          factory-method="layoutManager" />
+
+    <!-- Cache configuration -->
+    <bean id="ehcache"
+          class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
+          p:configLocation="file:${rookboom.config.dir}/ehcache.xml"/>
+
+    <!-- Time mask manager -->
+    <bean id="timeMaskManager"
+          factory-bean="serviceFactory"
+          factory-method="timeMaskManager" />
+
+    <!-- LDAP -->
+    <bean id="ldapContextSource"
+          class="org.springframework.ldap.core.support.LdapContextSource"
+          p:url="${ldap.url}"
+          p:base="${ldap.base}"
+          p:userDn="${ldap.user}@${ldap.domain}"
+          p:password="${ldap.password}"/>
+
+    <bean id="ldapTemplate"
+          class="org.springframework.ldap.core.LdapTemplate"
+          p:contextSource-ref="ldapContextSource"
+          p:ignorePartialResultException="true"/>
+
+
+    <!-- User manager -->
+    <bean id="userManager"
+          factory-bean="serviceFactory"
+          factory-method="userManager" />
+
+</beans>

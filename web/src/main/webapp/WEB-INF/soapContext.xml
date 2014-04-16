@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:p="http://www.springframework.org/schema/p"
+        xmlns:c="http://www.springframework.org/schema/c"
+        xmlns:oxm="http://www.springframework.org/schema/oxm"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                            http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.1.xsd
+                            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <oxm:jaxb2-marshaller id="marshaller" contextPath="com.microsoft.exchange.messages:com.microsoft.exchange.types"/>
+
+    <bean id="authScope"
+          class="org.apache.http.auth.AuthScope"
+          c:host="#{null}"
+          c:port="-1"
+          c:realm="#{null}"
+          c:scheme="NTLM" />
+
+    <bean id="credentials"
+          class="org.apache.http.auth.NTCredentials"
+          c:userName="${exchange.user}"
+          c:password="${exchange.password}"
+          c:workstation=""
+          c:domain="${exchange.domain}" />
+
+    <bean id="messageSender"
+          class="org.springframework.ws.transport.http.HttpComponentsMessageSender"
+          p:credentials-ref="credentials"
+          p:authScope-ref="authScope"
+          p:connectionTimeout="${exchange.timeout}"
+          p:readTimeout="${exchange.timeout}"/>
+
+    <bean id="wsTemplate"
+          class="org.springframework.ws.client.core.WebServiceTemplate"
+          p:marshaller-ref="marshaller"
+          p:unmarshaller-ref="marshaller"
+          p:messageSender-ref="messageSender"
+          p:defaultUri="${exchange.url}" />
+
+    <!-- session scoped WS template uses user's credentials -->
+
+    <bean id="securityContext"
+          factory-method="getContext"
+          class="org.springframework.security.core.context.SecurityContextHolder"
+          scope="session"/>
+
+    <bean id="userCredentials"
+          class="org.apache.http.auth.NTCredentials"
+          c:userName="#{securityContext.getAuthentication().getName()}"
+          c:password="#{securityContext.getAuthentication().getCredentials()}"
+          c:workstation=""
+          c:domain="${exchange.domain}"
+          scope="session" />
+
+    <bean id="userMessageSender"
+          class="org.springframework.ws.transport.http.HttpComponentsMessageSender"
+          p:credentials-ref="userCredentials"
+          p:authScope-ref="authScope"
+          p:connectionTimeout="${exchange.timeout}"
+          p:readTimeout="${exchange.timeout}"
+          scope="session">
+        <aop:scoped-proxy proxy-target-class="false"/>
+    </bean>
+
+    <bean id="userWsTemplate"
+          class="org.springframework.ws.client.core.WebServiceTemplate"
+          p:marshaller-ref="marshaller"
+          p:unmarshaller-ref="marshaller"
+          p:messageSender-ref="userMessageSender"
+          p:defaultUri="${exchange.url}" />
+
+</beans>

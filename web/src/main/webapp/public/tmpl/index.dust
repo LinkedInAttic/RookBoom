@@ -1,0 +1,141 @@
+{>base/}
+
+<!-- page specific js -->
+{<headExtra}
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', '{data.gaAccountNumber}']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+
+<script src="./public/js/model/Typeahead.js?v=${build.number}"></script>
+<script src="./public/js/model/Dialog.js?v=${build.number}"></script>
+<script src="./public/js/model/Recurrence.js?v=${build.number}"></script>
+<script src="./public/js/model/Location.js?v=${build.number}"></script>
+<script src="./public/js/model/LocationView.js?v=${build.number}"></script>
+<script src="./public/js/model/Auth.js?v=${build.number}"></script>
+<script src="./public/js/model/LoginView.js?v=${build.number}"></script>
+<script src="./public/js/model/Attendees.js?v=${build.number}"></script>
+<script src="./public/js/model/Suggestions.js?v=${build.number}"></script>
+<script src="./public/js/model/Rooms.js?v=${build.number}"></script>
+<script src="./public/js/model/FilterValues.js?v=${build.number}"></script>
+<script src="./public/js/model/FilterManager.js?v=${build.number}"></script>
+<script src="./public/js/model/TimeMask.js?v=${build.number}"></script>
+<script src="./public/js/model/AbstractView.js?v=${build.number}"></script>
+<script src="./public/js/model/AuthView.js?v=${build.number}"></script>
+<script src="./public/js/model/AttendeesView.js?v=${build.number}"></script>
+<script src="./public/js/model/BookInfoView.js?v=${build.number}"></script>
+<script src="./public/js/model/BookDialogView.js?v=${build.number}"></script>
+<script src="./public/js/model/DateView.js?v=${build.number}"></script>
+<script src="./public/js/model/FiltersView.js?v=${build.number}"></script>
+<script src="./public/js/model/TimeMaskView.js?v=${build.number}"></script>
+<script src="./public/js/model/RoomsView.js?v=${build.number}"></script>
+<script src="./public/js/model/HashView.js?v=${build.number}"></script>
+<script src="./public/js/booking.js?v=${build.number}"></script>
+
+<script type="text/javascript">
+    ROOKBOOM = {};
+    ROOKBOOM.contactsEmail = '{data.rookboomContactsEmail}';
+    ROOKBOOM.filtersConfig = {filters|json|s};
+    ROOKBOOM.authConfig = {principal|json|s};
+    ROOKBOOM.locationsConfig = {locations|json|s};
+    ROOKBOOM.defaultLocationId = '{data.defaultLocationId}';
+</script>
+{/headExtra}
+
+<!-- body content -->
+{<bodyContent}
+<div id="header-bar" class="width-aware">
+    <div id="board-header" class="width-aware">
+        <!-- filters bar -->
+        <div id="filters-view" class="width-aware">
+            <!-- logo -->
+            <a href="/" id="logo-view">
+                <img src="/public/i/logo.png"/>
+            </a>
+
+            <input type="text" placeholder="Room name filter..." id="name-filter"/>
+
+            <div id="menu">
+                <ul>
+                    <li id="menu-about">About</li>
+                    <li id="auth-info">{>auth/}</li>
+                    <li id="location-info"></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- date view -->
+        <div id="date-view">
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="config-view width-aware">
+        </div>
+
+        <div class="recurrence-view width-aware">
+        </div>
+
+        <!-- time mask row -->
+        <div class="time-mask-row top width-aware">
+        </div>
+
+        <div id="filter-controls">
+            <div class="toggle" id="filter-toggle"></div>
+            <div class="toggle" id="recurrence-toggle"></div>
+        </div>
+    </div>
+</div>
+<div id="board" class="width-aware">
+    <div class="config-view">
+    </div>
+    <div class="recurrence-view">
+    </div>
+    <!-- schedule -->
+    <div id="schedule">
+        <!-- attendees schedule -->
+        <div id="attendees">
+            <div class="group-row">
+                <h3 target="schedule-list-attendees">
+                    Attendees
+                    <img src="./public/i/arrow-down.png"/>
+                    <img style="display: none;" src="./public/i/arrow-right.png"/>
+                </h3>
+            </div>
+            <ul id="schedule-list-attendees">
+                <div id="attendees-list">
+                </div>
+                <li>
+                    <input id="attendees-input" type="text" placeholder="Attendee name or email..."/>
+
+                    <div id="attendee-preloader" class="preloader" style="">
+                        <img src="/public/i/preloader.gif"/>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- rooms -->
+        <div id="rooms">
+        </div>
+
+        <!-- time mask row -->
+        <div class="time-mask-row bottom">
+        </div>
+    </div>
+</div>
+
+<div id="footer" class="width-aware">
+    <ul id="legend">
+        <li><div class="outer"><div class="inner booked"></div></div><span>Room is booked</span></li>
+        <li><div class="outer"><div class="inner free"></div></div><span>Room is free</span></li>
+        <li><div class="outer"><div class="inner good"></div></div><span>Room is free and time is good for more than half attendees</span></li>
+        <li><div class="outer"><div class="inner best"></div></div><span>Room is free and time is good for all attendees</span></li>
+    </ul>
+</div>
+{/bodyContent}

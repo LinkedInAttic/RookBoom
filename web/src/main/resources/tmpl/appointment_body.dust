@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <style>
+            .text {
+                font-family: sans-serif;
+            }
+            pre {
+                white-space: pre-wrap;
+                white-space: -moz-pre-wrap;
+                white-space: -pre-wrap;
+                white-space: -o-pre-wrap;
+                word-wrap: break-word;
+            }
+        </style>
+    </head>
+    <body>
+        <pre class="text">{text}</pre>
+        </br>
+        </br>
+        <span class="text">Scheduled with <a href="{url}">RookBoom</a></span>
+    </body>
+</html>
+
+

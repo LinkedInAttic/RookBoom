@@ -1,0 +1,6 @@
+<div class="screen">
+    <div class="info-modal">
+        <a class="dialog close">&times;</a>
+        {+content/}
+    </div>
+</div>

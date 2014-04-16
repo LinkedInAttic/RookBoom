@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:mvc="http://www.springframework.org/schema/mvc"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:p="http://www.springframework.org/schema/p"
+        xmlns:util="http://www.springframework.org/schema/util"
+        xmlns:c="http://www.springframework.org/schema/c"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                            http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+                            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+    <context:property-placeholder location="file:${rookboom.config.dir}/config.properties"/>
+
+    <context:component-scan base-package="com.linkedin.rookboom.web"/>
+
+    <mvc:annotation-driven/>
+
+    <mvc:resources mapping="/favicon.ico" location="/i/favicon.ico"/>
+    <mvc:resources mapping="/public/lib/**" location="/webjars/"/>
+    <mvc:resources mapping="/public/**" location="/public/"/>
+
+    <bean id="indexControllerData" class="scala.collection.JavaConversions" factory-method="mapAsScalaMap">
+        <constructor-arg type="java.util.Map">
+            <util:map id="indexControllerData">
+                <entry key="gaAccountNumber" value="${ga.account.number}"/>
+                <entry key="rookboomContactsEmail" value="${rookboom.contacts.email}"/>
+                <entry key="defaultLocationId" value="${layout.default}"/>
+            </util:map>
+        </constructor-arg>
+    </bean>
+
+    <bean id="rookboomUrl" class="java.lang.String" c:_0="${rookboom.url}"/>
+
+    <!-- Dust Engine -->
+    <util:list id="dustJsResources">
+        <value>META-INF/resources/webjars/json/20121008/json.js</value>
+        <value>META-INF/resources/webjars/dustjs-linkedin/2.3.4/dust-full.min.js</value>
+        <value>js/dust-tools.js</value>
+    </util:list>
+
+    <util:list id="templatePaths">
+        <value>#{servletContext.getRealPath('/public/tmpl/')}</value>
+        <value>#{new org.springframework.core.io.ClassPathResource('tmpl').getFile()}</value>
+    </util:list>
+
+    <bean id="templateLoader"
+          class="com.linkedin.rookboom.web.dust.loader.FileSystemTemplateLoader"
+          c:paths-ref="templatePaths"
+          c:suffix=".dust"/>
+
+    <bean id="dustEngineFactory"
+          class="com.linkedin.rookboom.web.dust.engine.DustEngineFactoryImpl"
+          c:resources-ref="dustJsResources"
+          c:templateLoader-ref="templateLoader"
+          c:cacheTemplates="${dust.templates.cache}"
+          init-method="reloadTemplates"/>
+
+    <bean id="dustTemplateViewResolver"
+          class="com.linkedin.rookboom.web.dust.DustTemplateViewResolver"
+          c:dustEngineFactory-ref="dustEngineFactory"
+          c:cacheViews="${dust.templates.cache}" />
+
+    <util:list id="views">
+        <bean id="jsonView" class="com.linkedin.rookboom.web.JsonView"/>
+        <bean id="jsonPView" class="com.linkedin.rookboom.web.JsonView" p:withPadding="true"/>
+    </util:list>
+
+    <util:map id="mediaTypes">
+        <entry key="json" value="application/json" />
+        <entry key="jsonp" value="application/javascript" />
+        <entry key="html" value="text/html" />
+    </util:map>
+
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver"
+          p:viewResolvers-ref="dustTemplateViewResolver"
+          p:defaultViews-ref="views"
+          p:mediaTypes-ref="mediaTypes"
+          p:defaultContentType="text/html"
+          p:favorParameter="true"/>
+
+</beans>

@@ -1,0 +1,6 @@
+<div class="info-dialog">
+    <a class="dialog close">&times;</a>
+    <div class="content">
+        {+content/}
+    </div>
+</div>

@@ -1,0 +1,28 @@
+{>dialog/}
+{<content}
+
+<div class="about">
+    <div class="block">
+        <h3>
+            About RookBoom
+        </h3>
+        <p>Hi there!</p>
+        <p>RookBoom helps you find and book one of our hard-to-get meeting rooms. Only useful stuff, nothing unnecessary.</p>
+        <p>We do care about usability. If you have any comments/suggestions/delights please <a href="mailto:{email}" target="_blank">let us know</a>. We are really looking to your feedback.</p>
+        <p>RookBoom also provides a JSON API, so you can work on your awesome app and leverage rooms/schedule/users data we have. If you are missing some functionality &mdash; talk to us.</p>
+        <p>
+            Cheers,<br/>
+            RookBoom Team
+        </p>
+    </div>
+    <div class="block">
+        <h3>
+            Feedback / Feature Requests / Bug Reports
+        </h3>
+        <p class="email">
+            <a href="mailto:{email}" target="_blank">{email}</a>
+        </p>
+    </div>
+</div>
+
+{/content}

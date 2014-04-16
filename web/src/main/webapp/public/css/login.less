@@ -1,0 +1,36 @@
+@import url("common.less");
+
+@padding: 20px;
+
+.login-container {
+    color: #000000;
+    padding: @padding @padding 5px @padding;
+
+    form {
+        margin: 0;
+        padding: 0;
+    }
+
+    .field {
+        .float-container();
+        .label {
+            padding-top: 5px;
+        }
+        .left {
+            float: left;
+        }
+        .right {
+            float: right;
+        }
+
+        &.last {
+            margin-top: 10px;
+        }
+    }
+}
+
+#login-panel {
+    .center(2 * @padding + 170px);
+    background-image: url("../i/eggshell.jpg");
+    margin-top: 250px;
+}

@@ -1,0 +1,28 @@
+{#attendees}
+<li class="schedule-row" email="{user.address}">
+    {?user.photo}
+    <img src="{user.photo}"/>
+    {:else}
+    <img style="width: 24px; height: 24px; padding: 7px;" src="/public/i/group1.png"/>
+    {/user.photo}
+    <div class="user">
+        {user.displayName}
+    </div>
+    <a class="close">&times;</a>
+    <div class="schedule-list">
+        <ul>
+            {#schedule}
+            <li class="slot {?busy}busy{:else}free{/busy}" event="{eventId}" from="{from}" to="{to}">
+                {?firstFrame}
+                <div class="target busy-label length{length}"></div>
+                {/firstFrame}
+                {?busy}
+                {:else}
+                <div class="match" from="{from}"></div>
+                {/busy}
+            </li>
+            {/schedule}
+        </ul>
+    </div>
+</li>
+{/attendees}

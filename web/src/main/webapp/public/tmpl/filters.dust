@@ -1,0 +1,33 @@
+<ul class="filters-list-hor">
+    <li class="filter">
+        <h3>Time window</h3>
+        <ul class="timeframe-values">
+            {#timeframe}
+            <li class="timeframe-value {?active}active{/active}" data-value="{value}">
+                {name}
+            </li>
+            {/timeframe}
+        </ul>
+    </li>
+    {#filters}
+    <li class="filter">
+        <h3>{label}</h3>
+        <ul class="filter-values">
+            <li class="filter-reset {?any}active{/any}">
+                Any
+            </li>
+            {#values}
+            <li class="filter-value {?active}active{/active}" field="{field}" val="{value}">
+                {label}
+            </li>
+            {/values}
+        </ul>
+    </li>
+    {/filters}
+</ul>
+
+<div class="filters-actions block-actions">
+    <span class="action reset">Reset All</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="action collapse">Close</span>
+</div>
+
+<div class="sep"></div>

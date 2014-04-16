@@ -1,0 +1,16 @@
+{>dialog/}
+{<content}
+{?noroom}
+<div class="data" style="font-size: 14px; line-height: 25px; width: 540px;">
+    <p>Use this row when you are scheduling a meeting without a conference room,<br/>
+        like in the kitchen, in your team area or on fresh air outside the building.</p>
+    <p>This location will never be busy and an invitation is only sent to attendees.</p>
+</div>
+{:else}
+<div class="data">
+    <p class="name">{name}</p>
+    <p class="location">Building {attributes.building}, {attributes.floor} floor</p>
+    <p class="email">{email}</p>
+</div>
+{/noroom}
+{/content}

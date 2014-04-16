@@ -1,0 +1,32 @@
+{>dialog_base/}
+{<content}
+    <div class="book-info">
+        {?event.appointment}
+            {#event.appointment.owner isOwner=isOwner id=event.appointment.id}
+            <div class="pic">
+                {?photo}
+                <img width="80" height="80" src="{photo}"/>
+                {:else}
+                <img style="width: 24px; height: 24px; padding: 10px;" src="/public/i/group1.png"/>
+                {/photo}
+            </div>
+            <div class="descr">
+                {?isOwner}
+                    <p class="booked">Booked by you!</p>
+                    <div class="edit">
+                        <form class="cancel-form" action="/booking/cancel" method="POST">
+                            <input type="hidden" name="id" value="{id}"/>
+                        </form>
+                        <button class="btn cancel">Cancel Meeting</button>
+                    </div>
+                {:else}
+                    <p class="booked">Booked by</p>
+                    <p>{displayName}</p>
+                {/isOwner}
+            </div>
+            {/event.appointment.owner}
+        {:else}
+            <nobr>No info available</nobr>
+        {/event.appointment}
+    </div>
+{/content}

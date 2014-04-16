@@ -1,0 +1,8 @@
+<div class="attendee-input">
+    <input type="hidden" name="required" value="{address}"/>
+
+    <div class="required-attendee">
+        <div class="name">{displayName}</div>
+        <a class="exclude-attendee">&times;</a>
+    </div>
+</div>

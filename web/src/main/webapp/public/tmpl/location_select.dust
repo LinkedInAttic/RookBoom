@@ -1,0 +1,8 @@
+{>dialog_base/}
+{<content}
+<ul id="locations-select">
+    {#locations}
+    <li class="location-option" siteId="{id}">{name}</li>
+    {/locations}
+</ul>
+{/content}

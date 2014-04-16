@@ -1,0 +1,45 @@
+<div class="group-row">
+    <h3 target="schedule-list-{building|id}">
+        {building}
+        <img src="./public/i/arrow-down.png"/>
+        <img style="display: none;" src="./public/i/arrow-right.png"/>
+    </h3>
+    <div class="group-row-summary">
+    </div>
+</div>
+<ul id="schedule-list-{building|id}">
+    {#schedule}
+    <li class="schedule-row" room="{room.email}">
+        <h3>
+            {room.name}
+        </h3>
+
+        <div class="schedule-list">
+            <ul>
+                {#schedule}
+                <li class="slot {?busy}busy{:else}free{/busy}"
+                    event="{eventId}"
+                    from="{from}"
+                    to="{to}">
+                    {?firstFrame}
+                    <div class="target busy-label-outer length{length}"><div class="busy-label" event="{eventId}">{?isOwner}<div class="owner-label"></div>{/isOwner}</div></div>
+                    {/firstFrame}
+                    {?busy}
+                    {:else}
+                    <div class="match" from="{from}"></div>
+                    {/busy}
+                </li>
+                {/schedule}
+            </ul>
+        </div>
+
+        <div class="capacity">
+            <img class="{room.attributes.video}" style="margin-top: -3px;" src="/public/i/vc.png"/>
+            <img style="margin-top: -7px;" src="/public/i/group1.png"/>
+            <span>
+            {room.attributes.capacity}
+            </span>
+        </div>
+    </li>
+    {/schedule}
+</ul>

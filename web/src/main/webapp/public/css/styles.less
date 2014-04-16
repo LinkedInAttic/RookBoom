@@ -1,0 +1,283 @@
+@import url("common.less");
+@import url("shared.less");
+@import url("top.less");
+@import url("board.less");
+
+@top: 180px;
+@menuColor: white;
+@boardColor: black;
+@backColor: #48413D;
+@lightColor: #F3F0EB;
+@boardWidth: 1107px;
+@rowHeight: 40px;
+@slotWidth: 40px;
+@leftOffset: 190px;
+
+
+ul.typeahead {
+    z-index: 60;
+    padding: 0;
+    margin-top: 0px;
+    background-color: white;
+    width: 200px;
+    border: 1px solid #48413D;
+    .rounded-corners(0);
+
+    li {
+        padding: 5px 8px;
+
+        a {
+            padding: 0;
+            margin: 0;
+        }
+
+        .name {
+            font-size: 12px;
+        }
+
+        .email {
+            font-size: 11px;
+            opacity: 0.5;
+        }
+
+        &.active {
+            background-color: #48413D;
+            color: white;
+            a {
+                background-image: none;
+                background-color: #48413D;
+            }
+        }
+
+        &:hover {
+            background-color: #cbc7bd;
+            a, a:hover {
+                background-image: none;
+                background-color: #cbc7bd;
+            }
+        }
+    }
+}
+
+.width-aware {
+    .center(@boardWidth);
+}
+
+.crop {
+    height: 100%;
+    overflow: hidden;
+}
+
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    overflow-y: scroll;
+}
+
+.ui-datepicker {
+    width: auto;
+}
+
+.info-modal {
+    .rounded-corners(5px);
+    background-image: url('../i/dialog-bckg.png');
+    border: 2px solid @backColor;
+    color: @boardColor;
+    margin: 100px auto;
+    display: inline-block;
+    text-align: left;
+
+    .data {
+        margin: 20px;
+        .name {
+            font-size: 20px;
+        }
+        .location {
+            font-size: 20px;
+        }
+        .email {
+            line-height: 30px;
+            font-size: 14px;
+        }
+    }
+    a.close {
+        font-size: 25px;
+        margin: 9px 10px;
+    }
+}
+
+.dialog-block {
+    .block {
+        .rounded-corners(3px);
+        background-color: @lightColor;
+        margin: 30px;
+        padding: 10px;
+
+        h3 {
+            color: @backColor;
+            font-weight: bold;
+            font-size: 20px;
+        }
+    }
+}
+
+.faq {
+    .dialog-block();
+
+    li {
+        margin: 20px 0;
+        font-size: 16px;
+        b {
+            margin-right: 10px;
+        }
+    }
+}
+
+.about {
+    width: 600px;
+    .dialog-block();
+    .block {
+
+        p {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .email {
+            margin: 20px 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .team {
+            .float-container();
+            li {
+                float:left;
+                margin: 20px 30px;
+                img {
+                    display: block;
+                }
+                p {
+                    margin-top: 10px;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+.timeline {
+    position: absolute;
+    left: 0;
+    border-left: 1px solid lighten(black, 55%);
+}
+.now {
+    position: absolute;
+    z-index: 50;
+
+    &.line {
+        left: 0;
+        border-left: 2px solid orange;
+    }
+
+    &.pointer {
+        width: 12px;
+        height: 11px;
+        left: -5px;
+        &.up {
+            background: url("../i/time-pointer-up.png") no-repeat;
+            margin-top: -37px;
+        }
+        &.down {
+            background: url("../i/time-pointer-down.png") no-repeat;
+            margin-top: -12px;
+        }
+    }
+}
+
+#legend {
+    .float-container();
+    margin: 0 auto 20px auto;
+
+    li {
+        @size: 40px;
+
+        .outer {
+            float: left;
+            width: @size;
+            height: @size;
+            background-image: url("../i/eggshell.jpg");
+        }
+
+        .inner {
+            margin: 2px;
+            width: @size - 4px;
+            height: @size - 4px;
+
+            &.booked {
+                background-image: url("../i/cool-booked-op50.png");
+            }
+            &.good {
+                background-image: url("../i/match-1.png");
+                opacity: 0.5;
+            }
+            &.best {
+                background-color: rgba(0, 128, 0, 0.30000000000000004);
+            }
+        }
+
+        span {
+            line-height: @size;
+            margin-left: 10px;
+        }
+    }
+}
+
+.match {
+    position: absolute;
+
+    margin: 2px;
+    width: @slotWidth - 4px;
+    height: @rowHeight - 5px;
+    &.all {
+        background-color: fadeout(green, 70%);
+    }
+    &.some {
+        background: url("../i/match-1.png");
+        opacity: 0.5;
+    }
+    &.poor, &.none {
+    }
+}
+
+.length(@count) {
+    width: @count * (@slotWidth + 1) - 5px;
+}
+.length1 {.length(1);}
+.length2 {.length(2);}
+.length3 {.length(3);}
+.length4 {.length(4);}
+.length5 {.length(5);}
+.length6 {.length(6);}
+.length7 {.length(7);}
+.length8 {.length(8);}
+.length9 {.length(9);}
+.length10 {.length(10);}
+.length11 {.length(11);}
+.length12 {.length(12);}
+.length13 {.length(13);}
+.length14 {.length(14);}
+.length15 {.length(15);}
+.length16 {.length(16);}
+.length17 {.length(17);}
+.length18 {.length(18);}
+.length19 {.length(19);}
+.length20{.length(20);}
+.length21 {.length(21);}
+.length22 {.length(22);}

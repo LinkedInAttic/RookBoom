@@ -1,0 +1,16 @@
+{>dialog_base/}
+{<content}
+    <div id="login-dialog">
+        <div>
+            {text}
+        </div>
+        <div>
+            <form id="login-form" method="post" action="/j_spring_security_check">
+                <input type="hidden" name="ajax" value="true"/>
+                <p><input type="text" id="j_username" name="j_username" placeholder="Login..."/></p>
+                <p><input type="password" id="j_password" name="j_password" placeholder="Password..."/></p>
+                <p><button type="submit" class="btn btn-action">Login</button></p>
+            </form>
+        </div>
+    </div>
+{/content}
