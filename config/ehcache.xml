@@ -1,0 +1,7 @@
+<ehcache>
+  <cache name="schedule"
+         maxEntriesLocalHeap="20000"
+         timeToLiveSeconds="60"
+         overflowToDisk="false"
+         statistics="true"/>
+</ehcache>

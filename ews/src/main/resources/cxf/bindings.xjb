@@ -1,0 +1,37 @@
+<bindings version="2.1"
+          xmlns="http://java.sun.com/xml/ns/jaxb"
+          xmlns:xs="http://www.w3.org/2001/XMLSchema"
+          xmlns:simplify="http://jaxb2-commons.dev.java.net/basic/simplify"
+          extensionBindingPrefixes="simplify">
+
+
+  <bindings>
+    <globalBindings typesafeEnumMaxMembers="512">
+      <javaType name="java.util.Date"
+                xmlType="xs:dateTime"
+                parseMethod="org.apache.cxf.xjc.runtime.DataTypeAdapter.parseDateTime"
+                printMethod="org.apache.cxf.xjc.runtime.DataTypeAdapter.printDateTime"/>
+      <javaType name="java.util.Date"
+                xmlType="xs:date"
+                parseMethod="org.apache.cxf.xjc.runtime.DataTypeAdapter.parseDate"
+                printMethod="org.apache.cxf.xjc.runtime.DataTypeAdapter.printDate"/>
+    </globalBindings>
+  </bindings>
+
+  <bindings schemaLocation="../wsdl/messages.xsd" node="/xs:schema">
+    <schemaBindings >
+      <package name="com.microsoft.exchange.messages"></package>
+    </schemaBindings>
+  </bindings>
+
+  <bindings schemaLocation="../wsdl/types.xsd" node="/xs:schema">
+    <schemaBindings >
+      <package name="com.microsoft.exchange.types"></package>
+    </schemaBindings>
+  </bindings>
+
+  <bindings schemaLocation="../wsdl/messages.xsd" node="/xs:schema/xs:complexType[@name='ArrayOfResponseMessagesType']/xs:choice/xs:element[1]">
+    <simplify:as-element-property/>
+  </bindings>
+
+</bindings>
