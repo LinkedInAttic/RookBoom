@@ -59,11 +59,10 @@ with BookingEventListener {
     readWriteTransaction {
       // different processing for users and resources
       mailboxes.partition(userManager.getUserByAddress(_).isDefined) match {
-        case (users, rooms) => {
+        case (users, rooms) =>
           val userEvents = getUserSchedule(users, time)
           val roomEvents = getRoomSchedule(rooms, time)
           userEvents ++ roomEvents
-        }
       }
     }
   }
@@ -150,20 +149,10 @@ with BookingEventListener {
     // find newly created appointments
     val created = findCreated(stored, current)
     log.info("Adding {} events", created.size)
-    //TODO remove logging
-    internalDao.addEvents(created.map(c => {
-      val i = toInternalEvent(c)
-      log.info("Adding: {}", i)
-      i
-    }))
+    internalDao.addEvents(created.map(toInternalEvent))
     // find deleted appointments
     val deleted = findDeleted(stored, current)
     log.info("Deleting {} events", deleted.size)
-    //TODO remove logging
-    deleted.foreach {
-      d =>
-        log.info("Deleting: {}", d)
-    }
     internalDao.deleteEvents(deleted.map(_.id).toSet)
     log.info("Reloading completed")
   }

@@ -106,7 +106,7 @@ class ScheduleController extends ExceptionResolver {
 
     val result = repetition match {
       case None => Map.empty
-      case Some(rep) => {
+      case Some(rep) =>
         rep.toOccurrences(slot.begin, layout.timezone).toList match {
           case some :: tail => Map(
             "description" -> repetitionDescription(rep, layout.timezone),
@@ -114,7 +114,6 @@ class ScheduleController extends ExceptionResolver {
           )
           case _ => Map.empty
         }
-      }
     }
 
     result.asJava
@@ -200,21 +199,23 @@ class ScheduleController extends ExceptionResolver {
   private def loadSchedule(emails: Set[String], slot: TimeSlot, repetition: Option[Repetition], timeZone: TimeZone): Map[String, Seq[Event]] = {
     repetition match {
       case None => scheduleManager.getSchedule(emails, slot)
-      case Some(rep) => {
+      case Some(rep) =>
         val times = rep.toOccurrences(slot.begin, timeZone)
         scheduleManager.getSchedule(emails, times)
-      }
     }
   }
 
   private def convertSchedule(email: String, events: Seq[Event], mask: TimeMask): Seq[AvailabilityRecord] = {
-    mask.frames.map { f =>
-      val slot = TimeSlot(f, f + mask.interval)
-      events.find(_.time.overlaps(slot)) match {
-        case Some(i) => AvailabilityRecord(slot.begin, slot.end, busy = true, (email, i).hashCode())
-        case None => AvailabilityRecord(slot.begin, slot.end, busy = false)
-      }
+    mask.frames.map { frame =>
+      val slot = TimeSlot(frame + 1, frame + mask.interval - 1)
+      val eventOption = events.find(_.time.overlaps(slot))
+      val id = eventOption.fold(0)(eventId(email, _))
+      AvailabilityRecord(slot.begin, slot.end, busy = eventOption.isDefined, id)
     }
+  }
+
+  private def eventId(email: String, event: Event): Int = {
+    (email, event).hashCode()
   }
 
   private def timeSlot(fromParam: Long): TimeSlot = {
