@@ -118,6 +118,8 @@ Dev mode
 To run RookBoom in development mode, change `config.properties` inside the repo according to your environment, then run the `mvn jetty:run` command in the `web` folder. This brings the application up in a Jetty instance,
 launched by the Maven Jetty plugin. The application is now available at `http://localhost:12000`.
 
+You may need to change your VM configuration parameters to give the application more memory. For example, `-Xmx1024m -XX:MaxPermSize=256m`.
+
 You can also run the previous Maven command from an IDE to debug and hot reload your changes.
 
 You can change `log4j.xml` to enabled console logging.
