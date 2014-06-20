@@ -25,7 +25,6 @@ import com.linkedin.rookboom.schedule._
 import com.linkedin.rookboom.user.UserManager
 import compat.Platform
 import com.linkedin.rookboom.schedule.TimeSlot
-import scala.Some
 import com.linkedin.rookboom.schedule.TimeMask
 import com.linkedin.rookboom.layout.Room
 import java.util.{Date, TimeZone}
@@ -210,7 +209,7 @@ class ScheduleController extends ExceptionResolver {
       val slot = TimeSlot(frame + 1, frame + mask.interval - 1)
       val eventOption = events.find(_.time.overlaps(slot))
       val id = eventOption.fold(0)(eventId(email, _))
-      AvailabilityRecord(slot.begin, slot.end, busy = eventOption.isDefined, id)
+      AvailabilityRecord(frame, frame + mask.interval, busy = eventOption.isDefined, id)
     }
   }
 
