@@ -298,27 +298,24 @@ Some features are not yet supported by RookBoom. Some of them are:
 FAQ
 ===
 
-
 ### 1. RookBoom says 'booking successful', but the room is not booked
 #### Problem
 RookBoom says 'booking successful', but the room is not booked.
 #### Background
-RookBoom's success message is just a confirmation of the successfully sent booking request. Unfortunately RookBoom can't reliably confirm the actual room booking. The source of truth here is always an email from the room with a confirmation.
-#### Resolution
-Provide an explanation from this section.
+We do our best to verify that the room accepts the invitation. But in practice rooms' behaviour may vary depending on the configuration. So the source of truth here is always the email from the room with a confirmation.
 
 ### 2. Double Booking
 #### Problem
 Several people claim to book the same room for the same or overlapping time.
 #### Background
-Double booking is frequent complaint which is in fact a result of misunderstanding of the Exchange booking mechanics. The misunderstanding is based on the assumption that meeting request fails when the room rejects the booking, which is wrong. The truth is that room acts like any other attendee -- it can accept, reject or even ignore the invitation. The *meeting* however will still be created and the time in the creators calendar will be booked. But the main and the final confirmation of the room booking is an email from the room with an 'Accept' status. 
+Double booking is frequent complaint which is in fact a result of misunderstanding of the Exchange booking mechanics. The misunderstanding is based on the assumption that meeting request fails when the room rejects the booking, which is wrong. The truth is that room acts like any other attendee -- it can accept, reject or even ignore the invitation. The *meeting* however will still be created and the time in the creators calendar will be booked. But the main and the final confirmation of the room booking is an email from the room with the 'Accept' status. 
 The actual double booking would mean that two or more people received an 'Accepted' email from the same room for the same (or overlapping) time which we've never seen. 
 #### Resolution
-Whenever someone complains that double booking happened please provide an explanation of the booking mechanics and ask to provide two emails from the room in question with an 'Accept' status for overlapping time.
+Whenever someone complains that double booking happened please provide an explanation of the booking mechanics and ask to provide two emails from the room in question with the 'Accept' status for overlapping time.
 
 ### 3. RookBoom failed to book a room
 #### Problem
-While attempting to schedule a meeting RookBoom interface responds with an error message or not responds at all. 
+While attempting to schedule a meeting RookBoom interface responds with an error message or doesn't respond at all. 
 #### Resolution
 Several reasons are possible here:
 
@@ -334,27 +331,13 @@ The best point to start is an email that user gets back from the room after the 
 Some room that is displayed as booked in Outlook is displayed as available in RookBoom (or other way around).
 Sometime people may complain that booking failed because of the conflicting meeting while the slot was available in the RookBoom.
 #### Background
-RookBoom has a 10 minutes sync interval with Exchange which means that if the room was booked via Outlook (or the booking was canceled or modified) it may take up to 10 min before the booking will appear in the RookBoom. 
-#### Resolution
-Provide an explanation from this section, no action required.
+RookBoom syncs up with Exchange once every X minutes (where X is defined in the configuration). There may be a short period of time in between 2 synchronizations where RookBoom displays stale data.  If the room was booked via Outlook (or the booking was canceled or modified) it may take up to X min before the booking will appear in the RookBoom. 
 
-### 5. Drop-By room is displayed in RookBoom
+### 5. A restricted access room is displayed in RookBoom
 #### Problem
-The general complaint is that some room that is displayed in RookBoom should not be displayed there for some reasons (or vise versa -- room should be there but it's not). Variations are (but not limited to):
-
-- Drop-By room is displayed in RookBoom
-- Restricted room is displayed in RookBoom
-- Regular room is not displayed in RookBoom
-
+A restricted access room is displayed in RookBoom. When a user without required permissions tries to book it the request fails.
 #### Background
-RookBoom is using following conventions to automatically determine the rooms bookability:
-
-- name
-- LDAP property
-- ...
-
-#### Resolution
-By agreement with the Facilities team if neither of above is present the room is considered to be bookable and will be displayed in the RookBoom. So this kind of bug reports should be forwarded to the Help Desk team with instructions to verify room's naming or properties.
+Exchange allows to configure access permissions for individual resources. RookBoom shows all rooms despite their restrictions.
 
 ### 6. All booking requests fail for me
 #### Problem
@@ -362,16 +345,16 @@ The most probable cause (and in fact the only we had so far) is that user's pass
 #### Resolution
 Ask user to re-login to the RookBoom.
 
-### 7. Tentative time displayed as busy
+### 7. Tentative time displayed as free
 #### Problem
-If someone replies with a tentative status to the meeting this time will be marked as booked in the user's schedule in RookBoom.
+If someone replies with a tentative status to the meeting this time will be marked as free in the user's schedule in RookBoom.
 #### Background
-Exchange supports 3 time slot states: Free, Busy and Tentative and the Outlook UI displays all three states differently. In RookBoom we made a decision to support just 2 states (Free and Busy) so we had to convert tentative state to one of them. We made a choice to treat tentative time as busy.
-#### Resolution
-Provide an explanation from this section, no action required.
+Exchange supports 3 time slot states: Free, Busy and Tentative and the Outlook UI displays all three states differently. In RookBoom we made a decision to support just 2 states (Free and Busy) so we had to convert tentative state to one of them. We made a choice to treat tentative time as free.
 
-### 8. I can't log in using my LDAP credentials
+### 8. A user can't log in using his/her AD/LDAP credentials
 #### Problem
-exactly the same credentials work for Cinco and don't work for RookBoom.
+A user is able to login into Outlook, but not in RookBoom
+#### Background
+It's possible that user's LDAP entry is misconfigured (specifically the account name).
 #### Resolution
-It's actually possible that user's LDAP entry may be misconfigured (specifically the account name), so if it is in fact what user claims (i.e. not just a username/password misspelling) please ask Help Desk to verify user's LDAP entry.
+Verify that the 'samaccountname' LDAP attribute is equal to the user's login.
