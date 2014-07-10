@@ -22,7 +22,6 @@ import com.linkedin.rookboom.schedule.TrackingStatus._
 import com.linkedin.rookboom.util.TimeUtils._
 import java.util.TimeZone
 import scala.Predef._
-import scala.Some
 import com.linkedin.rookboom.util.TxUtils._
 import org.springframework.transaction.PlatformTransactionManager
 import scala.util.control.NonFatal
@@ -98,7 +97,6 @@ class BookingServiceImpl(val txManager: PlatformTransactionManager,
         appointmentDao.update(appt.uid, timeZone, None, None, None, Some(required), Some(optional), None, None),
         "Failed to add attendees"
       )
-
     }
   }
 
@@ -132,17 +130,19 @@ class BookingServiceImpl(val txManager: PlatformTransactionManager,
   }
 
   private def trackAcceptance(appt: Appointment, resources: Set[String], timeLeft: Long): Map[String, TrackingStatus] = {
+    // map containing all resources with status "unknown"
+    val unknownTracking = resources.map(_ -> Unknown).toMap
+    // try to get real acceptance information
     val tracking = appointmentDao.track(appt.uid)
     val filteredTracking = tracking match {
-      case Some(t) => t.filter(x => resources.contains(x._1))
-      case None => resources.map(_ -> Unknown).toMap
+      case Some(t) => unknownTracking ++ t.filter(x => resources.contains(x._1))
+      case None => unknownTracking
     }
     filteredTracking match {
       case t if !t.exists(_._2 == Unknown) || timeLeft <= 0 => t
-      case _ => {
+      case _ =>
         Thread.sleep(second)
         trackAcceptance(appt, resources, timeLeft - second)
-      }
     }
   }
 
