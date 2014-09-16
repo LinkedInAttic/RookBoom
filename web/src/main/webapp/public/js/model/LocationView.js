@@ -18,28 +18,34 @@ var LocationView = Backbone.View.extend({
 
     events: {
         'click #location-info p': 'selectDialog',
-        'click .location-option': 'changeLocation'
+        'click #locations-select .location-option': 'changeLocation'
     },
 
     initialize: function () {
         _.bindAll(this, 'render', 'selectDialog', 'changeLocation');
         this.options.filterValues.bind('change:location', this.render);
-        this.setElement('#location-info');
+        this.setElement('body');
         this.render();
     },
 
     render: function () {
         var id = this.options.filterValues.get('location');
-        $.dustReplace('location', this.model.getById(id), this.$el);
+        $.dustReplace('location', this.model.getById(id), $('#location-info'));
     },
 
     selectDialog: function () {
-        this.options.dialog.showPopover(
+        var locations = _.sortBy(this.model.get('config'), 'name'),
+            columns = 3,
+            size = (locations.length + columns - 1) / columns,
+            locationsInColumns = _.map(_.range(0, locations.length, size), function(idx) {
+                return locations.slice(idx, idx + size);
+            });
+
+        this.options.dialog.showModal(
             'location_select',
             {
-                locations: _.sortBy(this.model.get('config'), 'name')
+                locations: locationsInColumns
             },
-            this.$el,
             {
                 container: '#location-info'
             }

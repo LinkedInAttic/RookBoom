@@ -279,11 +279,16 @@
 }
 
 #locations-select {
-    max-height: 310px;
-    overflow-y: scroll;
+    .float-container();
+    padding: 20px;
 
-    li {
-        padding: 3px;
+    .location-options-list {
+      float: left;
+      min-width: 200px;
+    }
+
+    .location-option {
+        padding: 8px;
         font-size: 14px;
         &:hover {
             text-decoration: underline;

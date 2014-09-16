@@ -1,8 +1,12 @@
-{>dialog_base/}
+{>dialog/}
 {<content}
-<ul id="locations-select">
+<div id="locations-select">
     {#locations}
-    <li class="location-option" siteId="{id}">{name}</li>
+    <ul class="location-options-list">
+        {#.}
+        <li class="location-option" siteId="{id}">{name}</li>
+        {/.}
+    </ul>
     {/locations}
-</ul>
+</div>
 {/content}
