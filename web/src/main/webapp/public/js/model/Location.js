@@ -71,10 +71,10 @@ var Location = Backbone.Model.extend({
     },
 
     adjustTime: function (time, backward) {
-        var siteId = this.get('filterValues').get('location');
-        var locationOffset = this.getTimezoneOffsetById(siteId);
-        var timezoneCorrection = (locationOffset + new Date().getTimezoneOffset()) * 60 * 1000;
-        return time + (backward ? -timezoneCorrection : timezoneCorrection);
+        // As per new logic we are not doing any time adjustments:
+        // if you switch the location we are still gonna keep the same time
+        // frame in the timezone of your browser.
+        return time;
     },
 
     onChange: function () {
