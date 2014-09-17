@@ -18,7 +18,7 @@
 
     <mvc:annotation-driven/>
 
-    <mvc:resources mapping="/favicon.ico" location="/i/favicon.ico"/>
+    <mvc:resources mapping="/favicon.ico" location="/public/i/favicon.ico"/>
     <mvc:resources mapping="/public/lib/**" location="/webjars/"/>
     <mvc:resources mapping="/public/**" location="/public/"/>
 
