@@ -126,8 +126,9 @@ with BookingEventListener {
   }
 
   private def reloadingSlot(days: Int): TimeSlot = {
-    val now = Platform.currentTime
-    TimeSlot(now, TimeUtils.forward(Platform.currentTime, TimeUtils.day * days))
+    val from = TimeUtils.backward(Platform.currentTime, TimeUtils.day)
+    val to = TimeUtils.forward(from, TimeUtils.day * days)
+    TimeSlot(from, to)
   }
 
   override def reload() {
