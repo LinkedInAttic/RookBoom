@@ -107,7 +107,7 @@
 
     var loadTemplate = function (name, onload) {
         $.ajax({
-            url: '/public/tmpl/' + name + '.dust',
+            url: '/public/tmpl/' + name + '.dust?v=' + ROOKBOOM.buildNumber,
             dataType: 'text',
             success: function (data) {
                 var compiled = dust.compile(data, name);

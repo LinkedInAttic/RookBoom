@@ -13,6 +13,16 @@
     })();
 </script>
 
+<script type="text/javascript">
+    ROOKBOOM = {};
+    ROOKBOOM.contactsEmail = '{data.rookboomContactsEmail}';
+    ROOKBOOM.filtersConfig = {filters|json|s};
+    ROOKBOOM.authConfig = {principal|json|s};
+    ROOKBOOM.locationsConfig = {locations|json|s};
+    ROOKBOOM.defaultLocationId = '{data.defaultLocationId}';
+    ROOKBOOM.buildNumber = '${build.number}';
+</script>
+
 <script src="./public/js/model/Typeahead.js?v=${build.number}"></script>
 <script src="./public/js/model/Dialog.js?v=${build.number}"></script>
 <script src="./public/js/model/Recurrence.js?v=${build.number}"></script>
@@ -37,15 +47,6 @@
 <script src="./public/js/model/RoomsView.js?v=${build.number}"></script>
 <script src="./public/js/model/HashView.js?v=${build.number}"></script>
 <script src="./public/js/booking.js?v=${build.number}"></script>
-
-<script type="text/javascript">
-    ROOKBOOM = {};
-    ROOKBOOM.contactsEmail = '{data.rookboomContactsEmail}';
-    ROOKBOOM.filtersConfig = {filters|json|s};
-    ROOKBOOM.authConfig = {principal|json|s};
-    ROOKBOOM.locationsConfig = {locations|json|s};
-    ROOKBOOM.defaultLocationId = '{data.defaultLocationId}';
-</script>
 {/headExtra}
 
 <!-- body content -->
