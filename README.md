@@ -45,8 +45,8 @@ Building from source code
 
 To build the application from source code, run the following commands:
 
-    git clone git@gitli.corp.linkedin.com:booking/main.git
-    cd main
+    git clone git@github.com:linkedin/RookBoom.git
+    cd RookBoom
     mvn install
 
 This gives you a WAR file ready to be deployed into a Jetty container (`web/target/RookBoom.war`).
